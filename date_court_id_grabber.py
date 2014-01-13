@@ -39,5 +39,6 @@ def extract_evictions_table(html):
         location.append(line)
 
   case_info=DataFrame({'date':date_filed,'case_number':case_number,'style_of_case':style_of_case,'case_type':case_type,'location':location})
-  # evictions = case_info[case_info.case_type.str.strip() == "AC Rent and Possession "]
-  return case_info
+  
+  evictions = case_info[case_info.case_type.str.contains("AC Rent and Possession") ]
+  return evictions

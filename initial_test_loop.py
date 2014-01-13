@@ -10,7 +10,7 @@ import unittest, time, re, csv
 
 execfile("date_court_id_grabber.py")
 
-filename = "test_eviction_list.csv"
+filename = "region_six_list.csv"
 
 class InitialTestLoop(unittest.TestCase):
     def setUp(self):
@@ -21,7 +21,7 @@ class InitialTestLoop(unittest.TestCase):
         self.accept_next_alert = True
     
     def test_initial_test_loop(self):
-        with open('small_week_test.csv', 'rb') as f:
+        with open('weekly_dates.csv', 'rb') as f:
             reader = csv.reader(f)
             for row in reader:
                 week = row
