@@ -1,0 +1,1021 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Case.Net Filing Date Search Case List</title>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link type="text/css" rel="stylesheet" href="/casenet/styles/casenet.css"/>
+<script type="text/javascript" src="/casenet/scripts/casenet.js"></script>
+<script type="text/javascript">
+function setupWindow() {
+	setUpHeader();
+}
+
+function goToThisCase(caseId, dbSource) {
+	getObjectById("inputVO.caseNumber2").value = caseId;
+	getObjectById("inputVO.courtId2").value = dbSource;
+	getObjectById("caseHeaderForm").submit();
+}
+</script>
+
+
+<script language="javascript" type="text/javascript">
+function goToThisPage(pageOnButton) {
+ var setSize = 15;
+
+ var startingRecord = ((parseInt(pageOnButton)*setSize) - (setSize - 1));
+ getObjectById('startingRecord').value = startingRecord;
+ getObjectById('subAction').value = "search";
+ document.filingDateSearchForm.submit();
+}
+</script>
+</head>
+<body onload="setupWindow();">
+	<a name="topofpage"></a>
+	<table class="outerTable" cellpadding="0" cellspacing="0">
+		<tbody>
+		<form name="filingDateSearchForm" id="filingDateSearchForm" method="post" action="/casenet/cases/filingDateSearch.do">
+			<input type="hidden" name="inputVO.caseType" value="Civil">
+			<input type="hidden" name="inputVO.startDate" value="1/1/2008">
+			<input type="hidden" name="inputVO.errFlag" value="N">
+			<input type="hidden" name="inputVO.caseTypeDesc" value="">
+			<input type="hidden" name="inputVO.selectionAction" value="search">
+			<input type="hidden" name="inputVO.courtId" value="SMPDB0001_CT06">
+			<input type="hidden" name="inputVO.courtDesc" value="6th Judicial Circuit (Platte County)">
+			<input type="hidden" name="inputVO.countyDesc" value="All">
+			<input type="hidden" name="inputVO.countyCode" value="">
+			<input type="hidden" name="inputVO.locationDesc" value="All">
+			<input type="hidden" name="inputVO.locationCode" value="">
+			<input type="hidden" name="inputVO.caseStatus" value="A">
+			<input type="hidden" name="inputVO.type" value="CT">
+
+<input  type="hidden" id="startingRecord" name="inputVO.startingRecord" value="1"/>
+<input type="hidden"  id="totalRecords" name="inputVO.totalRecords" value="61"/>
+<input type="hidden"   id="subAction" name="inputVO.subAction" value="search"/>
+		</form>
+		<form name="caseHeaderForm" id="caseHeaderForm" method="post" action="/casenet/cases/header.do">
+			<input type="hidden" name="inputVO.caseNumber" value="" id="inputVO.caseNumber2">
+			<input type="hidden" name="inputVO.courtId" value="" id="inputVO.courtId2">
+		</form>
+			<tr style="vertical-align:top">
+				<td>
+
+<script type="text/javascript" src="/casenet/scripts/x.js"></script>
+<script type="text/javascript" src="/casenet/scripts/browser.js"></script>
+<script type="text/javascript">
+function setUpHeader() {
+}
+
+function getAbsoluteLeftHeader(objectId) {
+	// Get an object left position from the upper left viewport corner
+	// Tested with relative and nested objects
+	o = document.getElementById(objectId)
+	oLeft = o.offsetLeft            // Get left position from the parent object
+	while(o.offsetParent!=null) {   // Parse the parent hierarchy up to the document element
+		oParent = o.offsetParent    // Get parent object reference
+		oLeft += oParent.offsetLeft // Add parent left position
+		o = oParent
+	}
+	// Return left postion
+	return oLeft
+}
+
+var shouldHideMenus=true;
+
+function hideMenus(){
+	shouldHideMenus=true;
+	setTimeout("hiding()", 1000);
+}
+
+function hiding(){
+	if(shouldHideMenus){
+		hideWidget("helpMenu");
+		hideWidget("helpMenu1");
+		hideWidget("adminLinksMenu");
+		hideWidget("judicialLinksMenu");
+		hideWidget("efilingLinksMenu");
+	}
+}
+
+function showHelpMenu1() {
+	shouldHideMenus=false;
+	showWidget("helpMenu1");
+	hideWidget("helpMenu");
+	hideWidget("adminLinksMenu");
+	hideWidget("judicialLinksMenu");
+	hideWidget("efilingLinksMenu");
+}
+
+function showHelpMenu() {
+		shouldHideMenus=false;
+		showWidget("helpMenu");
+		hideWidget("helpMenu1");
+		hideWidget("adminLinksMenu");
+		hideWidget("judicialLinksMenu");
+		hideWidget("efilingLinksMenu");
+}
+
+function showJudicialLinksMenu() {
+		shouldHideMenus=false;
+		hideWidget("helpMenu");
+		hideWidget("helpMenu1");
+		hideWidget("adminLinksMenu");
+		showWidget("judicialLinksMenu");
+		hideWidget("efilingLinksMenu");
+}
+
+function showEfilingLinksMenu() {
+	shouldHideMenus=false;
+	hideWidget("helpMenu");
+	hideWidget("helpMenu1");
+	hideWidget("adminLinksMenu");
+	hideWidget("judicialLinksMenu");
+	showWidget("efilingLinksMenu");
+}
+
+function showAdminLinksMenu() {
+
+		getObjectById("adminLinksMenu").style.left = ((getAbsoluteLeftHeader("adminTD")+(getObjectById("adminTD").offsetWidth))-(getObjectById("adminLinksMenu").offsetWidth)-5);
+		shouldHideMenus=false;
+		hideWidget("helpMenu");
+		hideWidget("helpMenu1");
+		showWidget("adminLinksMenu");
+		hideWidget("judicialLinksMenu");
+		hideWidget("efilingLinksMenu");
+}
+
+function printContent(){
+
+	if(getObjectById("calendarFrame")!=null){
+
+
+		var iframeDoc = window.frames['calendarFrame'].document;
+			if(iframeDoc.getElementById("scheduleDiv")!=null){
+
+
+				iframeDoc.getElementById("scheduleSpan").innerHTML = iframeDoc.getElementById("scheduleDiv").innerHTML;
+
+				getObjectById("printDiv").innerHTML = iframeDoc.getElementById("iframeCaloutTable").innerHTML;
+				getObjectById("calendarFrame").style.display="none";
+				getObjectById("scheduleDiv").style.display="none";
+				getObjectById("scheduleSpan").style.display="inline";
+				getObjectById("printDiv").style.display="inline";
+				window.print();
+		        getObjectById("scheduleSpan").style.display="none";
+				getObjectById("printDiv").style.display="none";
+				getObjectById("scheduleDiv").style.display="inline";
+		        getObjectById("calendarFrame").style.display="inline";
+			}else if(iframeDoc.getElementById("dailyDiv")!=null){
+
+
+				iframeDoc.getElementById("dailySpan").innerHTML = iframeDoc.getElementById("dailyDiv").innerHTML;
+
+				getObjectById("printDiv").innerHTML = iframeDoc.getElementById("iframeCaloutTable").innerHTML;
+				getObjectById("calendarFrame").style.display="none";
+				getObjectById("dailyDiv").style.display="none";
+				getObjectById("dailySpan").style.display="inline";
+				getObjectById("printDiv").style.display="inline";
+				window.print();
+		        getObjectById("dailySpan").style.display="none";
+				getObjectById("printDiv").style.display="none";
+				getObjectById("dailyDiv").style.display="inline";
+		        getObjectById("calendarFrame").style.display="inline";
+		        window.frames['calendarFrame'].window.setupWindow();
+			}else if(iframeDoc.getElementById("weeklyDiv")!=null){
+
+
+
+				iframeDoc.getElementById("weeklyPrintSpanTopTitle").innerHTML = iframeDoc.getElementById("topTitleDiv").innerHTML;
+
+
+				window.frames['calendarFrame'].window.copyWeeklyPrint();
+				getObjectById("printDiv").innerHTML = iframeDoc.getElementById("iframeCaloutTable").innerHTML;
+				getObjectById("calendarFrame").style.display="none";
+				getObjectById("weeklyDiv").style.display="none";
+				getObjectById("weeklySpan").style.display="inline";
+				getObjectById("printDiv").style.display="inline";
+				window.print();
+				iframeDoc.getElementById("weeklyPrintSpanTopTitle").innerHTML = "";
+				getObjectById("printDiv").innerHTML = "";
+		       // getObjectById("weeklySpan").style.display="none";
+				getObjectById("printDiv").style.display="none";
+		      // getObjectById("weeklyDiv").style.display="inline";
+		        getObjectById("calendarFrame").style.display="inline";
+		        window.frames['calendarFrame'].window.setupWindow();
+		      	//getObjectById("calendarFrame").setupWindow();
+			}else {
+				window.print();
+			}
+	}else{
+
+		window.print();
+	}
+}
+
+function submitHeaderForm(searchBy){
+	getObjectById("searchType").value = searchBy;
+	getObjectById("headerForm").submit();
+}
+
+function submitLogon() {
+	getObjectById("logonForm").submit();
+}
+
+function submitLogoff() {
+	getObjectById("logoutForm").submit();
+}
+</script>
+<table class="headerTable">
+	<tbody>
+	<tr>
+		<td style="text-align:center;padding:2px">
+			<a href="/" tabindex="0">
+				<img border="0" alt="Missouri's Great Seal" title="Go to the Missouri Judiciary's Home Page" src="/casenet/pics/missouri_seal2.jpg" oncontextmenu="return false"/>
+			</a>
+		</td>
+		<td style="">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tbody>
+				<tr>
+					<td style="padding:2px;padding-bottom:0px" class="headerTitle">
+						<img src="/casenet/pics/courts_title.jpg" alt="Your Missouri Courts" title="Your Missouri Courts" />
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</td>
+		<td style="padding:2px;width:100%">
+		<form name="searchCasesForm" id="headerForm" method="post" action="/casenet/cases/searchCases.do">
+			<table cellpadding="0" cellspacing="0" border="0" align="right">
+				<tbody>
+				<tr>
+					<td colspan="2" style="text-align:right" align="right">
+						<a href="/casenet/index.jsp" tabindex="0" accesskey="1">
+							<img style="height:40px;border: 0" src="/casenet/pics/casenet_logo2.jpg" alt="Case.net Logo" title="Go to Case.net Home" />
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:right;vertical-align:middle;">
+						<span style="color:white">Search&nbsp;for&nbsp;Cases&nbsp;by:&nbsp;</span>
+					</td>
+
+					<td>
+						<select onchange="submitHeaderForm(searchType.options[searchType.selectedIndex].value)" tabindex="0" id="searchType" name="searchType" class="drop" style="width:180px">
+							<option value="default" selected="selected">Select&nbsp;Search&nbsp;Method...</option>
+							<option value="name">Litigant&nbsp;Name</option>
+							<option value="date">Filing&nbsp;Date</option>
+							<option value="caseNumber">Case&nbsp;Number</option>
+							<option value="calendar">Scheduled&nbsp;Hearings&nbsp;&amp;&nbsp;Trials</option>
+							<option value="judgmentAgainst">Judgment&nbsp;Index</option>
+
+
+						</select>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			</form>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<table cellpadding="0" cellspacing="0" border="0" class="primaryNav">
+	<tbody>
+	<tr>
+		<td>
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tbody>
+				<tr>
+					<td onmouseout="hideMenus();" >
+						<span class="primaryNavText" onmouseover="showJudicialLinksMenu()" onmouseout="hideMenus();">
+							&nbsp;Judicial&nbsp;Links
+						</span>
+						<img src="/casenet/pics/downarrow.gif" onmouseover="showJudicialLinksMenu();" alt="Down arrow image" />
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+
+
+
+
+								<a class="primaryNavText" title="Go to Logon Page" href="javascript:submitLogon()" tabindex="0">
+									eFiling
+								</a>
+								<img src="/casenet/pics/downarrow.gif" alt="Down arrow image" />
+								&nbsp;&nbsp;|&nbsp;&nbsp;
+
+								<!-- showHelpMenu  -->
+								<span onmouseover="showHelpMenu()" class="primaryNavText" onmouseout="hideMenus()">
+									Help
+								</span>
+								<img src="/casenet/pics/downarrow.gif" onmouseover="showHelpMenu()" onmouseout="hideMenus()" alt="Down arrow image" />
+
+
+
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a class="primaryNavText" href="http://www.courts.mo.gov/case.net/casenethelp.nsf/Contact?OpenForm" title="Send Us Your Comments or Suggestions" target="help" tabindex="0">
+							Contact&nbsp;Us</a>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a class="primaryNavText" href="javascript: printContent();" title="Click to print page content" tabindex="0">
+							Print
+						</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</td>
+		<td align="right">
+			<table cellpadding="0" cellspacing="0" border="0" style="text-align: right;">
+				<tbody>
+				<tr>
+
+
+					<td style="text-align:right;">
+
+								<form name="dummyForm" id="logonForm" method="post" action="/casenet/security/logonPage.do">
+									&nbsp;&nbsp;
+									<a class="primaryNavText" title="Go to Logon Page" href="javascript:submitLogon()" tabindex="0">Logon</a>
+								</form>
+
+
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<div id="judicialLinksMenu" class="hierMenu" style="left:1px;">
+	<table cellpadding="0" cellspacing="0" onmouseover="showJudicialLinksMenu()" onmouseout="hideMenus()">
+		<tbody>
+		<tr>
+			<td >
+				<a href="/page.jsp?id=27" title="">
+					Supreme&nbsp;Court
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/page.jsp?id=261" title="">
+					Court&nbsp;of&nbsp;Appeals
+				</a>
+			</td>
+		</tr>
+  		<tr>
+   			<td>
+				<a href="/page.jsp?id=321" title="">
+					Circuit&nbsp;Courts
+				</a>
+   			</td>
+    	</tr>
+  		<tr>
+   			<td>
+				<a href="/page.jsp?id=233" title="">
+					Office&nbsp;of&nbsp;State<br />&nbsp;Courts&nbsp;Administrator
+				</a>
+   			</td>
+    	</tr>
+ 		<tr>
+  			<td>
+				<a href="/page.jsp?id=244" title="">
+					Statewide&nbsp;Court<br />&nbsp;Automation
+				</a>
+			</td>
+		</tr>
+		<tr>
+   			<td>
+				<a href="/page.jsp?id=1944" title="">
+					Court&nbsp;Opinions
+				</a>
+   			</td>
+    	</tr>
+  		<tr>
+   			<td>
+				<a href="/page.jsp?id=594" title="">
+					Newsroom
+				</a>
+   			</td>
+    	</tr>
+  		<tr>
+  			<td>
+				<a href="/page.jsp?id=1073" title="">
+					Related&nbsp;Sites
+				</a>
+   			</td>
+  		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="efilingLinksMenu" class="hierMenu" style="left:105px;">
+	<table cellpadding="0" cellspacing="0" onmouseover="showEfilingLinksMenu()" onmouseout="hideMenus()">
+		<tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+		</tbody>
+	</table>
+</div>
+
+
+
+
+<div id="helpMenu" class="hierMenu" style="left:175px;">
+	<table cellpadding="0" cellspacing="0" onmouseover="showHelpMenu()" onmouseout="hideMenus()">
+		<tbody>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/842898cd604d014d8625681d005927bb?OpenDocument" target="help" title="Go to Our Help Page">
+					General&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/7733428CD725381C8625681D005A0A33?OpenDocument" target="help" title="Get Help Performing a Search">
+					Search&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/casenet/help/CourtSpecificHelp.jsp" target="help" title="Get Specialized Help for a Court">
+					Court&nbsp;Specific&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/ed498011b19f548186257974007563cd?OpenDocument" target="help" title="Go to Our Case Information Help Page">
+					Case&nbsp;Information&nbsp;Pages&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/BACD17B1C4B717BF862574490072EA2E?OpenDocument" target="help" title="Go to Our Municipal/Ordinance Help Page">
+					Municipal/Ordinance&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/casenet/base/logonHelp.do?" target="help" title="Go to Our Logon Help Page">
+					Logon&nbsp;Help
+				</a>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<a href="http://www.mofcc.com/" target="_blank">
+					Fine Collection Center Pay by Web
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/page.jsp?id=611" target="_blank">
+					Need Legal Help?
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.vinelink.com/" target="_blank">
+					Register with MOVANS - Victim Automated Notification
+				</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="helpMenu1" class="hierMenu" style="left:105px;">
+	<table cellpadding="0" cellspacing="0" onmouseover="showHelpMenu1()" onmouseout="hideMenus()">
+		<tbody>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/842898cd604d014d8625681d005927bb?OpenDocument" target="help" title="Go to Our Help Page">
+					General&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/7733428CD725381C8625681D005A0A33?OpenDocument" target="help" title="Get Help Performing a Search">
+					Search&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/casenet/help/CourtSpecificHelp.jsp" target="help" title="Get Specialized Help for a Court">
+					Court&nbsp;Specific&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/ed498011b19f548186257974007563cd?OpenDocument" target="help" title="Go to Our Case Information Help Page">
+					Case&nbsp;Information&nbsp;Pages&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/BACD17B1C4B717BF862574490072EA2E?OpenDocument" target="help" title="Go to Our Municipal/Ordinance Help Page">
+					Municipal/Ordinance&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/casenet/base/logonHelp.do?" target="help" title="Go to Our Logon Help Page">
+					Logon&nbsp;Help
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.mofcc.com/" target="_blank">
+					Fine Collection Center Pay by Web
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/page.jsp?id=611" target="_blank">
+					Need Legal Help?
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="http://www.vinelink.com/" target="_blank">
+					Register with MOVANS - Victim Automated Notification
+				</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+
+<div id="adminLinksMenu" class="hierMenu" style="">
+	<table cellpadding="0" cellspacing="0" onmouseover="showAdminLinksMenu()" onmouseout="hideMenus()">
+		<tbody>
+		<tr>
+
+		</tr>
+		<tr>
+
+		</tr>
+		</tbody>
+	</table>
+</div>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
+
+					<table style="width: 100%; height: 100%" border="0">
+						<tr>
+							<td valign="top">
+								<table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
+
+
+									<tr>
+										<td style="width: 5%">&nbsp;</td>
+										<td class="searchType">Search Results by Filing Date</td>
+										<td style="width: 5%">&nbsp;</td>
+									</tr>
+									<tr>
+										<td style="width: 5%">&nbsp;</td>
+										<td	class="locationTitle">
+											6th Judicial Circuit (Platte County)</td>
+										<td style="width: 5%">&nbsp;</td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td valign="top" colspan="3">
+
+
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3" style="font-size: 5pt;">&nbsp;</td>
+									</tr>
+								</table>
+								<table  style="width: 100%" cellpadding="0" cellspacing="0" border="0">
+									<tr>
+										<td colspan="3" class="resultDescription" align="center">Displaying <b> 1 </b>
+											thru <b>15</b> of <b>61</b>
+											records returned for dates of
+											<b>January 1, 2008</b>
+											&nbsp;to&nbsp;
+											<b>January 7, 2008</b>
+
+
+
+												for <b>All</b> Cases on <b>January 12, 2014</b>
+
+
+													for <b>Civil</b> case types
+
+													 in <b>All</b> court locations
+
+
+
+										</td>
+									</tr>
+								</table>
+
+ <!--The following is rendered by the paging tag-->
+<table align="center">
+ <tr>
+  <td>
+<span class="selectedPage">1</span>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(2);">2</a>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(3);">3</a>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(4);">4</a>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(5);">5</a>
+  </td>
+ </tr>
+</table>
+ <!--End of paging tag html-->
+
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" style="font-size: 5pt;">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr   style="height: 100%">
+				<td height="100%" valign="top">
+					<table align="center" width="100%" style="height: 100%">
+						<tr>
+							<td valign="top">
+								<table cellspacing="2" align="center" width="100%">
+									<tr align="left">
+										<td>&nbsp;</td>
+										<td class="header">Date&nbsp;Filed</td>
+										<td class="header">Case&nbsp;Number</td>
+										<td class="header" colspan="2">Style&nbsp;of&nbsp;Case</td>
+										<td class="header">Case&nbsp;Type</td>
+										<td class="header">Location</td>
+									</tr>
+
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00005', 'SMPDB0001_CT06');">
+										08AE-CV00005 </a>&nbsp;</td>
+										<td class="td1" colspan="2">BARCLAY CLUB APARTMENTS V MIKE MANDL&nbsp;</td>
+										<td class="td1">AC Rent and Possession&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/02/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00006', 'SMPDB0001_CT06');">
+										08AE-CV00006 </a>&nbsp;</td>
+										<td class="td2" colspan="2">ROPMO LLC V JESSICA ROBB&nbsp;</td>
+										<td class="td2">AC Unlawful Detainer&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00007', 'SMPDB0001_CT06');">
+										08AE-CV00007 </a>&nbsp;</td>
+										<td class="td1" colspan="2">CAPITAL ONE BANK V TONI L WICKS&nbsp;</td>
+										<td class="td1">AC Breach of Contract&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/02/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00008', 'SMPDB0001_CT06');">
+										08AE-CV00008 </a>&nbsp;</td>
+										<td class="td2" colspan="2">CAPITAL ONE BANK V CHRISTOPH B DOWDELL AKA&nbsp;</td>
+										<td class="td2">AC Breach of Contract&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00009', 'SMPDB0001_CT06');">
+										08AE-CV00009 </a>&nbsp;</td>
+										<td class="td1" colspan="2">NORTH KANSAS CITY HOSPITAL V RODNEY R NORDIN&nbsp;</td>
+										<td class="td1">CC Breach of Contract&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/02/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00010', 'SMPDB0001_CT06');">
+										08AE-CV00010 </a>&nbsp;</td>
+										<td class="td2" colspan="2">CACH LLC V LEONARD Z MCKENZIE&nbsp;</td>
+										<td class="td2">AC Breach of Contract&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00011', 'SMPDB0001_CT06');">
+										08AE-CV00011 </a>&nbsp;</td>
+										<td class="td1" colspan="2">CACH LLC V CHARLES A BRUCE JR&nbsp;</td>
+										<td class="td1">AC Breach of Contract&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/02/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00012', 'SMPDB0001_CT06');">
+										08AE-CV00012 </a>&nbsp;</td>
+										<td class="td2" colspan="2">CACH LLC V JOANIE HEDRICK&nbsp;</td>
+										<td class="td2">AC Breach of Contract&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00013', 'SMPDB0001_CT06');">
+										08AE-CV00013 </a>&nbsp;</td>
+										<td class="td1" colspan="2">COMMUNITY AMERICA CREDIT V ANGELA R STEPHENS&nbsp;</td>
+										<td class="td1">AC Suit on Account&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/02/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00014', 'SMPDB0001_CT06');">
+										08AE-CV00014 </a>&nbsp;</td>
+										<td class="td2" colspan="2">COMMUNITY AMERICA CREDIT V JAQUANA M DANIEL&nbsp;</td>
+										<td class="td2">AC Promissory Note&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00015', 'SMPDB0001_CT06');">
+										08AE-CV00015 </a>&nbsp;</td>
+										<td class="td1" colspan="2">ANDREA DELONG V ANGELA ZYNIEWICZ&nbsp;</td>
+										<td class="td1">AC Rent and Possession&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/02/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00016', 'SMPDB0001_CT06');">
+										08AE-CV00016 </a>&nbsp;</td>
+										<td class="td2" colspan="2">PROTECTION ORDER&nbsp;</td>
+										<td class="td2">CC Adult Abuse Stalking&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/02/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-MC00001', 'SMPDB0001_CT06');">
+										08AE-MC00001 </a>&nbsp;</td>
+										<td class="td1" colspan="2">JENNIFER DIANE WRIGHT V COREY WAYNE WRIGHT&nbsp;</td>
+										<td class="td1">CC CS Administrative Order&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td2">01/03/2008&nbsp;</td>
+										<td class="td2"><a
+											href="javascript:goToThisCase('08AE-CV00017', 'SMPDB0001_CT06');">
+										08AE-CV00017 </a>&nbsp;</td>
+										<td class="td2" colspan="2">EWING IRRIGATION PRODUCTS INC V KC NEWCASTLE ETAL&nbsp;</td>
+										<td class="td2">CC Reg Foreign Jgmt (excl DR)&nbsp;</td>
+										<td class="td2">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+
+
+									<tr align="left">
+										<td rowspan="1" class="rowItem">&nbsp;</td>
+										<td class="td1">01/03/2008&nbsp;</td>
+										<td class="td1"><a href="javascript:goToThisCase('08AE-CV00018', 'SMPDB0001_CT06');">
+										08AE-CV00018 </a>&nbsp;</td>
+										<td class="td1" colspan="2">KANSAS DEPARTMENT OF REVENUE V BRIAN BAUER&nbsp;</td>
+										<td class="td1">AC Reg of Foreign Judgment&nbsp;</td>
+										<td class="td1">Platte&nbsp;</td>
+									</tr>
+
+
+
+
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr>
+										<td colspan="3" class="resultDescription" align="center">Displaying <b> 1 </b>
+											thru <b>15</b> of <b>61</b>
+											records returned for dates of
+											<b>January 1, 2008</b>
+											&nbsp;to&nbsp;
+											<b>January 7, 2008</b>
+
+
+
+												for <b>All</b> Cases on <b>January 12, 2014</b>
+
+
+													for <b>Civil</b> case types
+
+													 in <b>All</b> court locations
+
+
+
+										</td>
+			</tr>
+			<tr>
+				<td>
+
+ <!--The following is rendered by the paging tag-->
+<table align="center">
+ <tr>
+  <td>
+<span class="selectedPage">1</span>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(2);">2</a>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(3);">3</a>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(4);">4</a>
+  </td>
+  <td>
+<a style="visibility:visible; color:blue; font-size:8pt; text-decoration:underline; cursor:pointer; font-weight:normal" href="javascript:goToThisPage(5);">5</a>
+  </td>
+ </tr>
+</table>
+ <!--End of paging tag html-->
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table style="width: 100%; margin: 1px;" cellpadding="0" cellspacing="0" border="0">
+	<tbody>
+	<tr>
+		<td style="padding:2px; padding-top:0px; padding-bottom:0px;" colspan="3">
+			<img src="/casenet/pics/footer_rule2.jpg" style="width:100%; height:2px;" alt="Footer rule image." title="" />
+		</td>
+	</tr>
+	<tr>
+			<td class="footerCell" style="text-align:left;">
+			Case.net Version 5.13.4.6
+			</td>
+		<td class="footerCell" style="text-align:center;">
+			<a class="footerLink" href="#" tabindex="0">Return to Top of Page</a>
+		</td>
+		<td class="footerCell" style="text-align:right;">Released 12/04/2013</td>
+	</tr>
+	</tbody>
+</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>
+
