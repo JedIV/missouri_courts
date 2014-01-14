@@ -4,10 +4,11 @@ from pandas import *
 def extract_evictions_table(html):
 
   soup = BeautifulSoup(html)
-
-  table = soup.findAll('table')[17]
-
-  rows = soup.findAll('table')[17].findAll('td')
+  
+  try:
+    rows = soup.findAll('table')[17].findAll('td')
+  except:
+    rows = ''
 
   date_filed = []
   case_number = []

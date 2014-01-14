@@ -1,0 +1,927 @@
+<?xml version="1.0"?>
+
+
+
+
+  
+  
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Case.net: Party Details</title>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link type="text/css" rel="stylesheet" href="/casenet/styles/casenet.css"/>
+<script type="text/javascript" src="/casenet/scripts/casenet.js"></script>
+<script type="text/javascript"> 
+  var pageName = "parties";    
+  
+  function setupWindow() {
+    setUpHeader();
+    setupPallette();  
+  }
+
+</script>
+</head>
+<body onload="setupWindow();">
+   <a name="topofpage"></a>
+<table class="outerTable" cellpadding="0" cellspacing="0">
+  <tr  valign="top">
+    <td> 
+      <table cellpadding="0" cellspacing="0" border="0" style="width: 100%"> 
+  <tbody><tr>
+    <td>
+<script type="text/javascript" src="/casenet/scripts/x.js"></script>
+<script type="text/javascript" src="/casenet/scripts/browser.js"></script>
+<script type="text/javascript"> 
+function setUpHeader() {
+}
+  
+function getAbsoluteLeftHeader(objectId) {
+  // Get an object left position from the upper left viewport corner
+  // Tested with relative and nested objects
+  o = document.getElementById(objectId)
+  oLeft = o.offsetLeft            // Get left position from the parent object
+  while(o.offsetParent!=null) {   // Parse the parent hierarchy up to the document element
+    oParent = o.offsetParent    // Get parent object reference
+    oLeft += oParent.offsetLeft // Add parent left position
+    o = oParent
+  }
+  // Return left postion
+  return oLeft
+}
+
+var shouldHideMenus=true;
+
+function hideMenus(){ 
+  shouldHideMenus=true;
+  setTimeout("hiding()", 1000);
+}
+
+function hiding(){
+  if(shouldHideMenus){
+    hideWidget("helpMenu");
+    hideWidget("helpMenu1");
+    hideWidget("adminLinksMenu");
+    hideWidget("judicialLinksMenu");
+    hideWidget("efilingLinksMenu");
+  }
+}
+
+function showHelpMenu1() { 
+  shouldHideMenus=false;
+  showWidget("helpMenu1");
+  hideWidget("helpMenu");
+  hideWidget("adminLinksMenu");
+  hideWidget("judicialLinksMenu");
+  hideWidget("efilingLinksMenu");
+}
+
+function showHelpMenu() { 
+    shouldHideMenus=false;
+    showWidget("helpMenu");
+    hideWidget("helpMenu1");
+    hideWidget("adminLinksMenu");
+    hideWidget("judicialLinksMenu");
+    hideWidget("efilingLinksMenu");
+}
+
+function showJudicialLinksMenu() {
+    shouldHideMenus=false;
+    hideWidget("helpMenu");
+    hideWidget("helpMenu1");
+    hideWidget("adminLinksMenu");
+    showWidget("judicialLinksMenu");
+    hideWidget("efilingLinksMenu");
+}
+
+function showEfilingLinksMenu() {
+  shouldHideMenus=false;
+  hideWidget("helpMenu");
+  hideWidget("helpMenu1");
+  hideWidget("adminLinksMenu");
+  hideWidget("judicialLinksMenu");
+  showWidget("efilingLinksMenu");
+}
+
+function showAdminLinksMenu() {
+    
+    getObjectById("adminLinksMenu").style.left = ((getAbsoluteLeftHeader("adminTD")+(getObjectById("adminTD").offsetWidth))-(getObjectById("adminLinksMenu").offsetWidth)-5);
+    shouldHideMenus=false;
+    hideWidget("helpMenu");
+    hideWidget("helpMenu1");
+    showWidget("adminLinksMenu");
+    hideWidget("judicialLinksMenu");
+    hideWidget("efilingLinksMenu");
+}
+
+function printContent(){
+
+  if(getObjectById("calendarFrame")!=null){
+    
+    
+    var iframeDoc = window.frames['calendarFrame'].document;
+      if(iframeDoc.getElementById("scheduleDiv")!=null){
+        
+        
+        iframeDoc.getElementById("scheduleSpan").innerHTML = iframeDoc.getElementById("scheduleDiv").innerHTML;
+        
+        getObjectById("printDiv").innerHTML = iframeDoc.getElementById("iframeCaloutTable").innerHTML;
+        getObjectById("calendarFrame").style.display="none";
+        getObjectById("scheduleDiv").style.display="none";
+        getObjectById("scheduleSpan").style.display="inline";
+        getObjectById("printDiv").style.display="inline";
+        window.print();
+            getObjectById("scheduleSpan").style.display="none";
+        getObjectById("printDiv").style.display="none";
+        getObjectById("scheduleDiv").style.display="inline";
+            getObjectById("calendarFrame").style.display="inline";
+      }else if(iframeDoc.getElementById("dailyDiv")!=null){
+        
+        
+        iframeDoc.getElementById("dailySpan").innerHTML = iframeDoc.getElementById("dailyDiv").innerHTML;
+        
+        getObjectById("printDiv").innerHTML = iframeDoc.getElementById("iframeCaloutTable").innerHTML;
+        getObjectById("calendarFrame").style.display="none";
+        getObjectById("dailyDiv").style.display="none";
+        getObjectById("dailySpan").style.display="inline";
+        getObjectById("printDiv").style.display="inline";
+        window.print();
+            getObjectById("dailySpan").style.display="none";
+        getObjectById("printDiv").style.display="none";
+        getObjectById("dailyDiv").style.display="inline";
+            getObjectById("calendarFrame").style.display="inline";
+            window.frames['calendarFrame'].window.setupWindow();
+      }else if(iframeDoc.getElementById("weeklyDiv")!=null){
+        
+        
+        
+        iframeDoc.getElementById("weeklyPrintSpanTopTitle").innerHTML = iframeDoc.getElementById("topTitleDiv").innerHTML;
+        
+        
+        window.frames['calendarFrame'].window.copyWeeklyPrint();
+        getObjectById("printDiv").innerHTML = iframeDoc.getElementById("iframeCaloutTable").innerHTML;
+        getObjectById("calendarFrame").style.display="none";
+        getObjectById("weeklyDiv").style.display="none";
+        getObjectById("weeklySpan").style.display="inline";
+        getObjectById("printDiv").style.display="inline";
+        window.print();
+        iframeDoc.getElementById("weeklyPrintSpanTopTitle").innerHTML = "";
+        getObjectById("printDiv").innerHTML = "";
+           // getObjectById("weeklySpan").style.display="none";
+        getObjectById("printDiv").style.display="none";
+          // getObjectById("weeklyDiv").style.display="inline";
+            getObjectById("calendarFrame").style.display="inline";
+            window.frames['calendarFrame'].window.setupWindow();
+            //getObjectById("calendarFrame").setupWindow();
+      }else {
+        window.print();
+      }
+  }else{
+    
+    window.print();
+  }
+}
+
+function submitHeaderForm(searchBy){ 
+  getObjectById("searchType").value = searchBy;
+  getObjectById("headerForm").submit();
+}
+
+function submitLogon() {
+  getObjectById("logonForm").submit();
+}
+
+function submitLogoff() {
+  getObjectById("logoutForm").submit();
+}
+</script>
+<table class="headerTable">
+  <tbody>
+  <tr>
+    <td style="text-align:center;padding:2px">
+      <a href="/" tabindex="0">                
+        <img border="0" alt="Missouri's Great Seal" title="Go to the Missouri Judiciary's Home Page" src="/casenet/pics/missouri_seal2.jpg" oncontextmenu="return false"/>
+      </a>
+    </td>
+    <td style="">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr>
+          <td style="padding:2px;padding-bottom:0px" class="headerTitle">  
+            <img src="/casenet/pics/courts_title.jpg" alt="Your Missouri Courts" title="Your Missouri Courts" />
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+    <td style="padding:2px;width:100%">
+    <form name="searchCasesForm" id="headerForm" method="post" action="/casenet/cases/searchCases.do">
+      <table cellpadding="0" cellspacing="0" border="0" align="right">
+        <tbody>
+        <tr>
+          <td colspan="2" style="text-align:right" align="right">  
+            <a href="/casenet/index.jsp" tabindex="0" accesskey="1">
+              <img style="height:40px;border: 0" src="/casenet/pics/casenet_logo2.jpg" alt="Case.net Logo" title="Go to Case.net Home" />
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:right;vertical-align:middle;">
+            <span style="color:white">Search&nbsp;for&nbsp;Cases&nbsp;by:&nbsp;</span>
+          </td>
+          
+          <td>
+            <select onchange="submitHeaderForm(searchType.options[searchType.selectedIndex].value)" tabindex="0" id="searchType" name="searchType" class="drop" style="width:180px">
+              <option value="default" selected="selected">Select&nbsp;Search&nbsp;Method...</option>
+              <option value="name">Litigant&nbsp;Name</option>
+              <option value="date">Filing&nbsp;Date</option>
+              <option value="caseNumber">Case&nbsp;Number</option>
+              <option value="calendar">Scheduled&nbsp;Hearings&nbsp;&amp;&nbsp;Trials</option>
+              <option value="judgmentAgainst">Judgment&nbsp;Index</option>
+              
+              
+            </select>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      </form>
+    </td>      
+  </tr>
+  </tbody>
+</table>
+
+<table cellpadding="0" cellspacing="0" border="0" class="primaryNav">
+  <tbody>
+  <tr>
+    <td>
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr>
+          <td onmouseout="hideMenus();" >
+            <span class="primaryNavText" onmouseover="showJudicialLinksMenu()" onmouseout="hideMenus();">
+              &nbsp;Judicial&nbsp;Links
+            </span>
+            <img src="/casenet/pics/downarrow.gif" onmouseover="showJudicialLinksMenu();" alt="Down arrow image" />
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+          
+        
+            
+            
+                <a class="primaryNavText" title="Go to Logon Page" href="javascript:submitLogon()" tabindex="0">
+                  eFiling
+                </a>
+                <img src="/casenet/pics/downarrow.gif" alt="Down arrow image" />
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+              
+                <!-- showHelpMenu  -->
+                <span onmouseover="showHelpMenu()" class="primaryNavText" onmouseout="hideMenus()">
+                  Help
+                </span>
+                <img src="/casenet/pics/downarrow.gif" onmouseover="showHelpMenu()" onmouseout="hideMenus()" alt="Down arrow image" />
+              
+            
+          
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a class="primaryNavText" href="http://www.courts.mo.gov/case.net/casenethelp.nsf/Contact?OpenForm" title="Send Us Your Comments or Suggestions" target="help" tabindex="0">
+              Contact&nbsp;Us</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a class="primaryNavText" href="javascript: printContent();" title="Click to print page content" tabindex="0">
+              Print
+            </a>  
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+    <td align="right">      
+      <table cellpadding="0" cellspacing="0" border="0" style="text-align: right;">
+        <tbody>
+        <tr>
+        
+           
+          <td style="text-align:right;">      
+            
+                <form name="dummyForm" id="logonForm" method="post" action="/casenet/security/logonPage.do">
+                  &nbsp;&nbsp;
+                  <a class="primaryNavText" title="Go to Logon Page" href="javascript:submitLogon()" tabindex="0">Logon</a>
+                </form>
+            
+            
+          </td>
+        </tr>
+        </tbody>
+      </table>      
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div id="judicialLinksMenu" class="hierMenu" style="left:1px;">
+  <table cellpadding="0" cellspacing="0" onmouseover="showJudicialLinksMenu()" onmouseout="hideMenus()">
+    <tbody>
+    <tr>
+      <td >
+        <a href="/page.jsp?id=27" title="">
+          Supreme&nbsp;Court
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/page.jsp?id=261" title="">
+          Court&nbsp;of&nbsp;Appeals
+        </a>
+      </td>
+    </tr>
+      <tr>
+         <td>
+        <a href="/page.jsp?id=321" title="">
+          Circuit&nbsp;Courts
+        </a>
+         </td>
+      </tr>
+      <tr>
+         <td>
+        <a href="/page.jsp?id=233" title="">
+          Office&nbsp;of&nbsp;State<br />&nbsp;Courts&nbsp;Administrator
+        </a>
+         </td>
+      </tr>
+     <tr>
+        <td>
+        <a href="/page.jsp?id=244" title="">
+          Statewide&nbsp;Court<br />&nbsp;Automation
+        </a>
+      </td>
+    </tr>
+    <tr>
+         <td>
+        <a href="/page.jsp?id=1944" title="">
+          Court&nbsp;Opinions
+        </a>
+         </td>
+      </tr>
+      <tr>
+         <td>
+        <a href="/page.jsp?id=594" title="">
+          Newsroom
+        </a>
+         </td>
+      </tr>
+      <tr>
+        <td>
+        <a href="/page.jsp?id=1073" title="">
+          Related&nbsp;Sites
+        </a>
+         </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="efilingLinksMenu" class="hierMenu" style="left:105px;">
+  <table cellpadding="0" cellspacing="0" onmouseover="showEfilingLinksMenu()" onmouseout="hideMenus()">
+    <tbody>
+     
+    
+     
+        
+     
+    
+     
+      
+      
+    
+    
+    
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div id="helpMenu" class="hierMenu" style="left:175px;">
+  <table cellpadding="0" cellspacing="0" onmouseover="showHelpMenu()" onmouseout="hideMenus()">
+    <tbody>
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/842898cd604d014d8625681d005927bb?OpenDocument" target="help" title="Go to Our Help Page">
+          General&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/7733428CD725381C8625681D005A0A33?OpenDocument" target="help" title="Get Help Performing a Search">
+          Search&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/casenet/help/CourtSpecificHelp.jsp" target="help" title="Get Specialized Help for a Court">
+          Court&nbsp;Specific&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/ed498011b19f548186257974007563cd?OpenDocument" target="help" title="Go to Our Case Information Help Page">
+          Case&nbsp;Information&nbsp;Pages&nbsp;Help
+        </a>
+      </td>
+    </tr>  
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/BACD17B1C4B717BF862574490072EA2E?OpenDocument" target="help" title="Go to Our Municipal/Ordinance Help Page">
+          Municipal/Ordinance&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/casenet/base/logonHelp.do?" target="help" title="Go to Our Logon Help Page">
+          Logon&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        <a href="http://www.mofcc.com/" target="_blank">
+          Fine Collection Center Pay by Web
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/page.jsp?id=611" target="_blank">
+          Need Legal Help?
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.vinelink.com/" target="_blank">
+          Register with MOVANS - Victim Automated Notification
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="helpMenu1" class="hierMenu" style="left:105px;">
+  <table cellpadding="0" cellspacing="0" onmouseover="showHelpMenu1()" onmouseout="hideMenus()">
+    <tbody>
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/842898cd604d014d8625681d005927bb?OpenDocument" target="help" title="Go to Our Help Page">
+          General&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/7733428CD725381C8625681D005A0A33?OpenDocument" target="help" title="Get Help Performing a Search">
+          Search&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/casenet/help/CourtSpecificHelp.jsp" target="help" title="Get Specialized Help for a Court">
+          Court&nbsp;Specific&nbsp;Help
+        </a>
+      </td>
+    </tr> 
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/dd5cab6801f1723585256474005327c8/ed498011b19f548186257974007563cd?OpenDocument" target="help" title="Go to Our Case Information Help Page">
+          Case&nbsp;Information&nbsp;Pages&nbsp;Help
+        </a>
+      </td>
+    </tr>  
+    <tr>
+      <td>
+        <a href="http://www.courts.mo.gov/case.net/casenethelp.nsf/DD5CAB6801F1723585256474005327C8/BACD17B1C4B717BF862574490072EA2E?OpenDocument" target="help" title="Go to Our Municipal/Ordinance Help Page">
+          Municipal/Ordinance&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/casenet/base/logonHelp.do?" target="help" title="Go to Our Logon Help Page">
+          Logon&nbsp;Help
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.mofcc.com/" target="_blank">
+          Fine Collection Center Pay by Web
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/page.jsp?id=611" target="_blank">
+          Need Legal Help?
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.vinelink.com/" target="_blank">
+          Register with MOVANS - Victim Automated Notification
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div id="adminLinksMenu" class="hierMenu" style="">
+  <table cellpadding="0" cellspacing="0" onmouseover="showAdminLinksMenu()" onmouseout="hideMenus()">
+    <tbody>
+    <tr>
+      
+    </tr>
+    <tr>
+      
+    </tr>
+    </tbody>
+  </table>
+</div></td> 
+  </tr> 
+  <tr>
+    <td style="vertical-align: top">
+      <table style="width:100%">
+        <tbody><tr>
+          <td>
+            <table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
+              <tbody><tr>
+                <td style="width: 10%">&nbsp</td>  
+                <td class="searchType">08AE-CV00015 - ANDREA DELONG V ANGELA ZYNIEWICZ&nbsp;</td>
+                <td style="width: 10%">&nbsp</td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>
+        <tr>
+          <td valign="middle">
+            <script type="text/javascript"> 
+
+function submitForCaseDetails (action) {
+
+  document.casePalletteForm.action = action;
+  document.casePalletteForm.submit();
+}
+  
+function setupPallette() {
+  //alert(pageName);  
+  if (pageName == "header") {
+    document.header.src='../pics/caseheaderno.gif';
+    document.header.alt='Displaying case header';
+  } else if (pageName == "parties") {
+    document.parties.src='../pics/partiesno.gif';
+    document.parties.alt='Displaying party details';
+  } else if (pageName == "dockets") {
+    document.docket.src='../pics/docketentno.gif';
+    document.docket.alt='Displaying docket entry details';
+  } else if (pageName == "charges") {  
+    document.charge.src='../pics/chargesno.gif';
+    document.charge.alt='Displaying charge details';
+  } else if (pageName == "events") {
+    document.events.src='../pics/heartrialno.gif';
+    document.events.alt='Displaying event details';
+  } else if (pageName == "judgements") {
+    document.judgement.src='../pics/judgementsno.gif';
+    document.judgement.alt='Displaying judgement details';
+  } else if (pageName == "service") {
+    document.service.src='../pics/serviceinfono.gif';
+    document.service.alt='Displaying service information details';
+  } else if (pageName == "filings") {
+    document.filings.src='../pics/filingsdueno.gif';
+    document.filings.alt='Displaying filings due details';
+  } else if (pageName == "garnishments") {
+    document.garnishment.src='../pics/garnno.gif';
+    document.garnishment.alt='Displaying garnishment details';
+  }
+}
+
+</script>
+<form name="casePalletteForm" action="#" method="post">
+<input type="hidden" name="inputVO.caseNumber" value="08AE-CV00015">
+<input type="hidden" name="inputVO.courtId" value="SMPDB0001_CT06">
+<input type="hidden" name="inputVO.caseDesc" value="ANDREA DELONG V ANGELA ZYNIEWICZ">
+<input type="hidden" name="inputVO.courtDesc" value="6th Judicial Circuit (Platte County)">
+<input type="hidden" name="inputVO.courtType" value="C">
+<input type="hidden" name="inputVO.vineCode" value="382">
+<input type="hidden" name="inputVO.predCode" value="ZS">
+<input type="hidden" name="inputVO.vineID" value="">
+<input type="hidden" name="inputVO.caseTypeCode" value="R1">
+<input type="hidden" name="inputVO.vineDisplay" value="N">
+<input type="hidden" name="inputVO.fileId" value="">
+<input type="hidden" name="inputVO.locnCode" value="AE">
+<input type="hidden" name="inputVO.dispositionDate" value="02/20/2008">
+<input type="hidden" name="inputVO.dispositionTime" value="15:44:12">
+<input type="hidden" name="inputVO.isDisposed" value="Y">
+
+
+
+<center>
+<table cellspacing="0" cellpadding="0" border="0">
+    
+          
+
+  <tr align="center" valign="bottom">
+    <td>
+      <a href="javascript:submitForCaseDetails('header.do')"><img name="header" border="0" src="/casenet/pics/caseheadergoy.gif" alt="Navigate to case header"></a><a href="javascript:submitForCaseDetails('parties.do')"><img name="parties" border="0" src="/casenet/pics/partiesgoy.gif" alt="Navigate to party details"></a><a href="javascript:submitForCaseDetails('searchDockets.do')"><img name="docket" border="0" src="/casenet/pics/docketentgoy.gif" alt="Navigate to docket entry details"></a><a href="javascript:submitForCaseDetails('charges.do')"><img name="charge" border="0" src="/casenet/pics/chargesgoy.gif" alt="Navigate to charge details"></a><a href="javascript:submitForCaseDetails('service.do')"><img name="service" border="0" src="/casenet/pics/serviceinfogoy.gif" alt="Navigate to service information details"></a><a href="javascript:submitForCaseDetails('filings.do')"><img name="filings" border="0" src="/casenet/pics/filingsduegoy.gif" alt="Navigate to filings due details"></a><a href="javascript:submitForCaseDetails('events.do')"><img name="events" border="0" src="/casenet/pics/heartrialgoy.gif" alt="Navigate to event details"></a><a href="javascript:submitForCaseDetails('judgements.do')"><img name="judgement" border="0" src="/casenet/pics/judgementsgoy.gif" alt="Navigate to judgement details"></a><a href="javascript:submitForCaseDetails('garnishment.do')"><img name="garnishment" border="0" src="/casenet/pics/garngoy.gif" alt="Navigate to garnishment details" ></a>
+    </td>
+  </tr>
+
+    
+</table>
+</center>
+</form>  
+          </td>  
+        </tr>
+        <tr>
+          <td>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+              <tr>
+                <td style="padding:2px;padding-top:0px;padding-bottom:0px" colspan="3"><img src="/casenet/pics/footer_rule.gif" style="width:100%;height:2px" alt="Page seperating line" /></td>
+              </tr>
+            </tbody></table>      
+          </td>
+        </tr>
+        <tr>
+          <td valign="middle">
+            
+
+
+          </td>  
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+    </td>
+  </tr>
+  
+  <tr  style="height: 100%;vertical-align: top;">
+    <td>
+      
+          <table width="100%">
+            <tr>
+              <td class="disclaimerText">
+                This information is provided as a service and is not considered an official court record. 
+              </td>
+            </tr>
+          
+            <tr>
+              <td valign="top">
+                  <table class="detailRecordTable">
+                    
+                          <tr>
+                            <td width="32%" class="detailSeperator" style="width:32%;text-align:left">
+                                DELONG
+                                
+                                  , ANDREA
+                                
+                                
+                                
+                                
+                                , Plaintiff&nbsp;&nbsp;&nbsp;
+                              
+                            </td>
+                
+                            <td width="19%"  class="detailSeperator" style="width:19%;font-weight: normal">
+                              
+                                represented by&nbsp;&nbsp;&nbsp;
+                              
+                            </td>
+                
+                            <td width="49%"  class="detailSeperator" style="width:49%;text-align:left">
+                              
+                                                            
+                                MONAGHAN
+                                
+                                  , DANIEL
+                                 
+                                 
+                                  E
+                                
+                                 
+                                , Attorney for Plaintiff
+                              
+                              
+                            </td>
+                          </tr>
+              
+                          <tr>
+                            <td  width="32%" class="detailData">
+                              
+                              
+                                
+                                  3601 NE 82ND ST<br />
+                                
+                                
+                                
+                                
+                                  KANSAS CITY, 
+                                  MO 
+                                  64119<br />
+                                  
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+
+                              
+
+                            
+                            
+                            
+                              
+                              
+                            </td>
+                            
+                            <td width="19%" class="detailData">
+                              
+                            </td>
+                  
+                            <td width="49%"class="detailData">
+                              
+                              
+                                
+                                  5600 N E  ANTIOCH RD<br />
+                                
+                                
+                                
+                                  KANSAS CITY, 
+                                  MO 
+                                  64119-2377<br />
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                                <b>Business:</b> 
+                                  (816) 
+                                  452-1800 
+                                  <br />
+                              
+                              
+                              
+                              
+                              <br />
+                              
+                              
+                              <p></p>
+                            </td>
+                            
+                          </tr>
+                      
+                
+                          <tr>
+                            <td width="32%" class="detailSeperator" style="width:32%;text-align:left">
+                                ZYNIEWICZ
+                                
+                                  , ANGELA
+                                
+                                 
+                                  MICHELLE
+                                
+                                
+                                
+                                , Defendant&nbsp;&nbsp;&nbsp;
+                              
+                            </td>
+                
+                            <td width="19%"  class="detailSeperator" style="width:19%;font-weight: normal">
+                              
+                            </td>
+                
+                            <td width="49%"  class="detailSeperator" style="width:49%;text-align:left">
+                              
+                              
+                            </td>
+                          </tr>
+              
+                          <tr>
+                            <td  width="32%" class="detailData">
+                              
+                              
+                                
+                                  6-1/2 E FIRST STREET<br />
+                                
+                                
+                                
+                                
+                                  PARKVILLE, 
+                                  MO 
+                                  64152<br />
+                                  
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+
+                              
+                              
+                                <br />
+                                <b>Year of Birth: </b>
+                                1972
+                              
+                              
+                              
+
+                            
+                            
+                            
+                              
+                              
+                            </td>
+                            
+                            <td width="19%" class="detailData">
+                              
+                            </td>
+                  
+                            <td width="49%"class="detailData">
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              <br />
+                              
+                              
+                              <p></p>
+                            </td>
+                            
+                          </tr>
+                      
+                
+              </table>
+            </td>
+          </tr>
+        </table>
+      
+    </td>
+  </tr>
+  
+  
+  
+  
+  <tr valign="top">
+    <td>
+      <table style="width: 100%; margin: 1px;" cellpadding="0" cellspacing="0" border="0">
+  <tbody>
+  <tr>
+    <td style="padding:2px; padding-top:0px; padding-bottom:0px;" colspan="3">
+      <img src="/casenet/pics/footer_rule2.jpg" style="width:100%; height:2px;" alt="Footer rule image." title="" />
+    </td>
+  </tr>
+  <tr>
+      <td class="footerCell" style="text-align:left;">
+      Case.net Version 5.13.4.6
+      </td>
+    <td class="footerCell" style="text-align:center;">
+      <a class="footerLink" href="#" tabindex="0">Return to Top of Page</a>
+    </td>
+    <td class="footerCell" style="text-align:right;">Released 12/04/2013</td>
+  </tr>
+  </tbody>
+</table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

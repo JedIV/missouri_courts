@@ -3,18 +3,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
-from pandas import *
-
 import unittest, time, re
 
-execfile("address_grabber.py")
-
-filename = "list_with_addresses.csv"
-
-evictions = read_csv("region_six_list.csv",header = None)
-evictions.columns = ['rank','caseID','case_type','date','location','case_style']
-
-class IndividualCaseLookup(unittest.TestCase):
+class DebuggerIndCase(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
@@ -22,23 +13,11 @@ class IndividualCaseLookup(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_individual_case_lookup(self):
-        for index, row in evictions.iterrows():
-            caseID = row['caseID']
-            caseID = caseID.strip()
-            driver = self.driver
-            driver.get(self.base_url + "/casenet/base/welcome.do")
-            driver.find_element_by_id("caseSearchImg").click()
-            Select(driver.find_element_by_id("courtId")).select_by_visible_text("6th Judicial Circuit (Platte County)")
-            driver.find_element_by_id("inputVO.caseNo").clear()
-            driver.find_element_by_id("inputVO.caseNo").send_keys(caseID)
-            driver.find_element_by_id("findButton").click()
-            driver.find_element_by_link_text(caseID).click()
-            driver.find_element_by_name("parties").click()
-            html = driver.page_source
-            evic_addresses = extract_address(html)
-            print evic_addresses
-            evic_addresses.to_csv(filename, header = False, mode = 'a')
+    def test_debugger_ind_case(self):
+        driver = self.driver
+        driver.get(self.base_url + "/casenet/cases/searchCases.do?searchType=caseNumber")
+        driver.find_element_by_id("findButton").click()
+        driver.find_element_by_link_text("08AE-CV00005").click()
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
