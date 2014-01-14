@@ -37,6 +37,9 @@ class IndividualCaseLookup(unittest.TestCase):
             driver.find_element_by_name("parties").click()
             html = driver.page_source
             evic_addresses = extract_address(html)
+            evic_addresses['caseID'] = row['caseID'].strip()
+            evic_addresses['date'] = row['date'].strip()
+            evic_addresses['case_style'] = row['case_style'].strip()
             print evic_addresses
             evic_addresses.to_csv(filename, header = False, mode = 'a')
     
