@@ -40,6 +40,8 @@ class IndividualCaseLookup(unittest.TestCase):
             evic_addresses['caseID'] = row['caseID'].strip()
             evic_addresses['date'] = row['date'].strip()
             evic_addresses['case_style'] = row['case_style'].strip()
+            evic_addresses['case_type'] = row['case_type'].strip()
+            evic_addresses['location'] = row['location'].strip()
             print evic_addresses
             evic_addresses.to_csv(filename, header = False, mode = 'a')
     
