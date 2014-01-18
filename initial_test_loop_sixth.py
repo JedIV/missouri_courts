@@ -10,7 +10,7 @@ import unittest, time, re, csv
 
 execfile("date_court_id_grabber.py")
 
-filename = "region_sixteen_list.csv"
+filename = "region_six_list.csv"
 
 class InitialTestLoop(unittest.TestCase):
     def setUp(self):
@@ -28,7 +28,7 @@ class InitialTestLoop(unittest.TestCase):
                 driver = self.driver
                 driver.get(self.base_url + "/casenet/base/welcome.do")
                 driver.find_element_by_id("dateSearchImg").click()
-                Select(driver.find_element_by_id("courtId")).select_by_visible_text("16th Judicial Circuit (Jackson County)")
+                Select(driver.find_element_by_id("courtId")).select_by_visible_text("6th Judicial Circuit (Platt County)")
                 driver.find_element_by_id("inputVO.startDate").clear()
                 driver.find_element_by_id("inputVO.startDate").send_keys(week)
                 driver.find_element_by_id("findButton").click()
