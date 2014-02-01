@@ -9,7 +9,7 @@ import unittest, time, re
 
 execfile("address_grabber.py")
 
-filename = "list_with_addresses.csv"
+filename = "region_6_list_with_addresses.csv"
 
 evictions = read_csv("region_six_list.csv",header = None)
 evictions.columns = ['rank','caseID','case_type','date','location','case_style']
@@ -17,33 +17,36 @@ evictions.columns = ['rank','caseID','case_type','date','location','case_style']
 class IndividualCaseLookup(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
-        self.driver.implicitly_wait(30)
+        #self.driver.implicitly_wait(30)
         self.base_url = "https://www.courts.mo.gov/"
         self.verificationErrors = []
         self.accept_next_alert = True
-    
+        driver = self.driver
+        driver.get(self.base_url + "/casenet/base/welcome.do")
+        driver.find_element_by_id("caseSearchImg").click()
     def test_individual_case_lookup(self):
+        driver = self.driver
         for index, row in evictions.iterrows():
             caseID = row['caseID']
             caseID = caseID.strip()
-            driver = self.driver
-            driver.get(self.base_url + "/casenet/base/welcome.do")
-            driver.find_element_by_id("caseSearchImg").click()
             Select(driver.find_element_by_id("courtId")).select_by_visible_text("6th Judicial Circuit (Platte County)")
             driver.find_element_by_id("inputVO.caseNo").clear()
             driver.find_element_by_id("inputVO.caseNo").send_keys(caseID)
             driver.find_element_by_id("findButton").click()
             driver.find_element_by_link_text(caseID).click()
-            driver.find_element_by_name("parties").click()
+            go_to_parties = "submitForCaseDetails('parties.do')"
+            driver.execute_script(go_to_parties)
+            #driver.find_element_by_name("parties").click()
             html = driver.page_source
             evic_addresses = extract_address(html)
+            
             evic_addresses['caseID'] = row['caseID'].strip()
             evic_addresses['date'] = row['date'].strip()
             evic_addresses['case_style'] = row['case_style'].strip()
             evic_addresses['case_type'] = row['case_type'].strip()
             evic_addresses['location'] = row['location'].strip()
-            print evic_addresses
-            evic_addresses.to_csv(filename, header = False, mode = 'a')
+            evic_addresses.to_csv(filename, header = False, mode = 'a',encoding = 'utf-8')
+            Select(driver.find_element_by_id("searchType")).select_by_visible_text("Case Number")
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)

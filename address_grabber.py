@@ -3,7 +3,6 @@ from pandas import *
 import pprint
 
 def extract_address(html):
-    html = open("address_page.html")
     soup = BeautifulSoup(html)
 
     def_address = []
