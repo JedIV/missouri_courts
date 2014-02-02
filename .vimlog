@@ -4528,8 +4528,8 @@ Searching for "/Users/jeddougherty/.vim/bundle/tabular/after/bitmaps/Help.bmp"
 Searching for "/Users/jeddougherty/.vim/after/bitmaps/Help.bmp"
 not found in 'runtimepath': "bitmaps/Help.bmp"
 Reading viminfo file "/Users/jeddougherty/.viminfo" info oldfiles
-"region_6_list_with_addresses.csv" 
-"region_6_list_with_addresses.csv" 3547L, 866493C
+"region_16_final.csv" 
+"region_16_final.csv" 59814L, 13971149C
 Reading viminfo file "/Users/jeddougherty/.viminfo" marks
 Searching for "scripts.vim" in "/Users/jeddougherty/.vim,/Users/jeddougherty/.vim/bundle/ack.vim,/Users/jeddougherty/.vim/bundle/autoload,/Users/jeddougherty/.vim/bundle/cdo,/Users/jeddougherty/.vim/bundle/command-t,/Users/jeddougherty/.vim/bundle/conque_2.0,/Users/jeddougherty/.vim/bundle/cucumbertables,/Users/jeddougherty/.vim/bundle/diffthese,/Users/jeddougherty/.vim/bundle/doc,/Users/jeddougherty/.vim/bundle/edit-plus,/Users/jeddougherty/.vim/bundle/gundo,/Users/jeddougherty/.vim/bundle/handlebars,/Users/jeddougherty/.vim/bundle/insert_mode_background_color,/Users/jeddougherty/.vim/bundle/matchit,/Users/jeddougherty/.vim/bundle/molokai,/Users/jeddougherty/.vim/bundle/nerdcommenter,/Users/jeddougherty/.vim/bundle/nerdtree,/Users/jeddougherty/.vim/bundle/regreplop,/Users/jeddougherty/.vim/bundle/snipMate,/Users/jeddougherty/.vim/bundle/syntastic,/Users/jeddougherty/.vim/bundle/tabular,/Users/jeddougherty/.vim/bundle/test_server,/Users/jeddougherty/.vim/bundle/vim-abolish,/Users/jeddougherty/.vim/bundle/vim-
 Searching for "/Users/jeddougherty/.vim/scripts.vim"
